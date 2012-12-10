@@ -9,8 +9,7 @@ local decks = { }
 decks.water = Deck.Create(12)
 local typeBox = decks.water:AddContentBox("center", "min", 1, 0.15)
 typeBox:SetAlignment("center", "min")
---local textBox = typeBox:AddTextBox("center", "center", 1, 1)
---textBox:SetText("WATER")
+typeBox:AddTextBox("WATER", "center", "center", 1, 1):SetAlignment("center", "min")
 
 local function DrawDecks(decks)
 
