@@ -4,12 +4,19 @@ local example = "Hello!"
 local canvas = nil
 
 local Deck = require("Deck")
+local TextBox = require("TextBox")
+local ImageBox = require("ImageBox")
 
 local decks = { }
-decks.water = Deck.Create(12)
+decks.water = Deck.Create(9)
+
 local typeBox = decks.water:AddContentBox("center", "min", 1, 0.15)
 typeBox:SetAlignment("center", "min")
-typeBox:AddTextBox("WATER", "center", "center", 1, 1):SetAlignment("center", "min")
+typeBox:AddBox(TextBox.Create("WATER", "center", "center", 20)):SetAlignment("center", "center")
+
+local mainImageBox = decks.water:AddContentBox("center", "center", 1, 0.70)
+mainImageBox:SetAlignment("center", "center")
+mainImageBox:AddBox(ImageBox.Create("card-art/water.png", "center", "center", 1, 1)):SetAlignment("center", "center")
 
 local function DrawDecks(decks)
 

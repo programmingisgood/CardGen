@@ -5,14 +5,28 @@ local Deck = { }
 
 local function Draw(self, xSize, ySize)
 
-    love.graphics.setColor(0, 0, 0, 255)
-    love.graphics.rectangle("line", 0, 0, xSize, ySize)
+    for c = 1, self.quantity do
     
-    for c = 1, #self.contentBoxes do
-    
-        love.graphics.push()
-        self.contentBoxes[c]:Draw(xSize, ySize)
-        love.graphics.pop()
+        love.graphics.setColor(0, 0, 0, 255)
+        love.graphics.rectangle("line", 0, 0, xSize, ySize)
+        
+        for b = 1, #self.contentBoxes do
+        
+            love.graphics.push()
+            self.contentBoxes[b]:Draw(xSize, ySize)
+            love.graphics.pop()
+            
+        end
+        
+        local x = xSize
+        local y = 0
+        if c % 3 == 0 then
+        
+            x = -xSize * 2
+            y = ySize
+            
+        end
+        love.graphics.translate(x, y)
         
     end
     
@@ -31,7 +45,7 @@ end
 
 Deck.Create = function(quantity)
 
-    local deck = { quantity = 12, contentBoxes = { } }
+    local deck = { quantity = quantity, contentBoxes = { } }
     deck.AddContentBox = AddContentBox
     deck.Draw = Draw
     
