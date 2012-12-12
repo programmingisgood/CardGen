@@ -5,25 +5,29 @@ local Deck = { }
 
 local function Draw(self, xSize, ySize)
 
+    love.graphics.setLineStyle("rough")
+    
+    local cardXSize = xSize / 3
+    local cardYSize = ySize / 3
     for c = 1, self.quantity do
     
         love.graphics.setColor(0, 0, 0, 255)
-        love.graphics.rectangle("line", 0, 0, xSize, ySize)
+        love.graphics.rectangle("line", 0, 0, cardXSize, cardYSize)
         
         for b = 1, #self.contentBoxes do
         
             love.graphics.push()
-            self.contentBoxes[b]:Draw(xSize, ySize)
+            self.contentBoxes[b]:Draw(cardXSize, cardYSize)
             love.graphics.pop()
             
         end
         
-        local x = xSize
+        local x = cardXSize
         local y = 0
         if c % 3 == 0 then
         
-            x = -xSize * 2
-            y = ySize
+            x = -cardXSize * 2
+            y = cardYSize
             
         end
         love.graphics.translate(x, y)
