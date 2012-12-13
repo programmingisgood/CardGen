@@ -15,11 +15,12 @@ local function DrawImageBox(imageBox, xSize, ySize)
     love.graphics.setColor(255, 255, 255, 255)
     local imageWidth = imageBox.image:getWidth()
     local imageHeight = imageBox.image:getHeight()
+    local cardSize = xSize < ySize and xSize or ySize
     love.graphics.draw(imageBox.image, 0, 0, 0, xSize / imageWidth * imageBox.xSize,
                        ySize / imageHeight * imageBox.ySize)
     
     love.graphics.setColor(0, 0, 0, 255)
-    love.graphics.rectangle("line", 0, 0, boxXSize, boxYSize)
+    --love.graphics.rectangle("line", 0, 0, boxXSize, boxYSize)
     
 end
 

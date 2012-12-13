@@ -26,4 +26,13 @@ Utils.SetBoxAlignment = function(box, xAlign, yAlign)
     
 end
 
+Utils.SetColor = function(item, red, green, blue, alpha)
+
+    item.red = red
+    item.green = green
+    item.blue = blue
+    item.alpha = alpha
+    
+end
+
 return Utils

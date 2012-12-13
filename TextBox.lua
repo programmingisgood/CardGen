@@ -17,10 +17,10 @@ local function DrawTextBox(textBox, xSize, ySize)
                                                          textBox.xAnchor, textBox.yAnchor)
     love.graphics.translate(x, y)
     
-    love.graphics.setColor(0, 0, 0, 255)
+    love.graphics.setColor(textBox.red or 0, textBox.green or 0, textBox.blue or 0, textBox.alpha or 255)
     love.graphics.print(textBox.text, 0, 0)
     
-    love.graphics.rectangle("line", 0, 0, boxXSize, boxYSize)
+    --love.graphics.rectangle("line", 0, 0, boxXSize, boxYSize)
     
 end
 
@@ -32,6 +32,7 @@ TextBox.Create = function(text, xAnchor, yAnchor, size)
     
     local textBox = { text = text, xAnchor = xAnchor, yAnchor = yAnchor, font = kFonts[size] }
     textBox.SetAlignment = Utils.SetBoxAlignment
+    textBox.SetColor = Utils.SetColor
     textBox.Draw = DrawTextBox
     
     return textBox

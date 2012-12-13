@@ -12,7 +12,7 @@ local function DrawContentBox(contentBox, xSize, ySize)
     
     love.graphics.setColor(0, 0, 0, 255)
     
-    love.graphics.rectangle("line", 0, 0, boxXSize, boxYSize)
+    --love.graphics.rectangle("line", 0, 0, boxXSize, boxYSize)
     
     for c = 1, #contentBox.contents do
     
