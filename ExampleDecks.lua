@@ -3,6 +3,8 @@ local Deck = require("Deck")
 local TextBox = require("TextBox")
 local ImageBox = require("ImageBox")
 
+local kFontName = "card-art/press-start-2p/PressStart2P.ttf"
+
 local decks = { }
 
 local function AddResource(typeName, r, g, b)
@@ -11,9 +13,10 @@ local function AddResource(typeName, r, g, b)
     
     local typeBox = resourceFront:AddContentBox("center", "min", 1, 0.15)
     typeBox:SetAlignment("center", "min")
-    local textBox = typeBox:AddBox(TextBox.Create(string.upper(typeName), "center", "center", 20))
+    local textBox = typeBox:AddBox(TextBox.Create(string.upper(typeName), "center", "center", 24))
     textBox:SetAlignment("center", "center")
     textBox:SetColor(r, g, b, 255)
+    textBox:SetFontName(kFontName)
     
     local mainImageBox = resourceFront:AddContentBox("center", "center", 1, 0.70)
     mainImageBox:SetAlignment("center", "center")
@@ -36,9 +39,10 @@ local function AddProperty(typeName, count)
     
     local typeBox = propertyFront:AddContentBox("center", "min", 1, 0.15)
     typeBox:SetAlignment("center", "min")
-    local textBox = typeBox:AddBox(TextBox.Create(string.upper(typeName), "center", "center", 20))
+    local textBox = typeBox:AddBox(TextBox.Create(string.upper(typeName), "center", "center", 24))
     textBox:SetAlignment("center", "center")
     textBox:SetColor(0, 0, 0, 255)
+    textBox:SetFontName(kFontName)
     
     local mainImageBox = propertyFront:AddContentBox("center", "center", 1, 0.70)
     mainImageBox:SetAlignment("center", "center")
@@ -47,7 +51,9 @@ local function AddProperty(typeName, count)
     local vpBox = propertyFront:AddContentBox("min", "min", 0.2, 0.2)
     vpBox:SetAlignment("min", "min")
     vpBox:AddBox(ImageBox.Create("card-art/vp.png", "center", "center", 1, 1)):SetAlignment("center", "center")
-    vpBox:AddBox(TextBox.Create("0", "center", "center", 24)):SetAlignment("center", "center")
+    local vpText = vpBox:AddBox(TextBox.Create("0", "center", "center", 24))
+    vpText:SetAlignment("center", "center")
+    vpText:SetFontName(kFontName)
     
     local propertyBack = Deck.Create(count)
     
@@ -62,7 +68,13 @@ end
 
 AddResource("water", 0, 0, 255)
 AddResource("tree", 0, 255, 0)
+AddResource("coal", 0, 0, 0)
+AddResource("stone", 127, 127, 127)
+AddResource("grain", 180, 130, 0)
 
 AddProperty("road", 12)
+AddProperty("bakery", 5)
+AddProperty("refinery", 5)
+AddProperty("power", 5)
 
 return decks

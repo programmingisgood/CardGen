@@ -3,14 +3,27 @@ local Utils = require("Utils")
 
 local TextBox = { }
 
-local kFonts = { }
+local kFonts = { default = { } }
 
 local function DrawTextBox(textBox, xSize, ySize)
 
-    love.graphics.setFont(textBox.font)
+    local fontName = textBox.fontName or "default"
+    kFonts[fontName] = kFonts[fontName] or { }
+    local useFont = kFonts[fontName][textBox.fontSize]
+    if not useFont then
     
-    local textWidth = textBox.font:getWidth(textBox.text)
-    local textHeight = textBox.font:getHeight(textBox.text)
+        if fontName == "default" then
+            kFonts[fontName][textBox.fontSize] = love.graphics.newFont(textBox.fontSize)
+        else
+            kFonts[fontName][textBox.fontSize] = love.graphics.newFont(fontName, textBox.fontSize)
+        end
+        useFont = kFonts[fontName][textBox.fontSize]
+        
+    end
+    love.graphics.setFont(useFont)
+    
+    local textWidth = useFont:getWidth(textBox.text)
+    local textHeight = useFont:getHeight(textBox.text)
     
     local x, y, boxXSize, boxYSize = Utils.CalcTranslate(xSize, ySize, textWidth / xSize, textHeight / ySize,
                                                          textBox.xAlign, textBox.yAlign,
@@ -24,15 +37,16 @@ local function DrawTextBox(textBox, xSize, ySize)
     
 end
 
+local function SetFontName(textBox, fontName)
+    textBox.fontName = fontName
+end
+
 TextBox.Create = function(text, xAnchor, yAnchor, size)
 
-    if not kFonts[size] then
-        kFonts[size] = love.graphics.newFont(size)
-    end
-    
-    local textBox = { text = text, xAnchor = xAnchor, yAnchor = yAnchor, font = kFonts[size] }
+    local textBox = { text = text, xAnchor = xAnchor, yAnchor = yAnchor, fontSize = size }
     textBox.SetAlignment = Utils.SetBoxAlignment
     textBox.SetColor = Utils.SetColor
+    textBox.SetFontName = SetFontName
     textBox.Draw = DrawTextBox
     
     return textBox

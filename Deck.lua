@@ -17,7 +17,7 @@ local function DrawCard(self, cardIndex, xSize, ySize)
     love.graphics.setLineStyle("rough")
     
     love.graphics.setColor(0, 0, 0, 255)
-    love.graphics.rectangle("line", 0, 0, xSize, ySize)
+    love.graphics.rectangle("line", 1, 0, xSize - 1, ySize - 1)
     
     for b = 1, #self.contentBoxes do
     
