@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <file>
+    <filename>ContentBox.lua</filename>
+  </file>
+  <file>
+    <filename>Deck.lua</filename>
+  </file>
+  <file>
+    <filename>Decks.lua</filename>
+  </file>
+  <file>
+    <filename>ExampleDecks.lua</filename>
+  </file>
+  <file>
+    <filename>ImageBox.lua</filename>
+  </file>
+  <file>
+    <filename>TextBox.lua</filename>
+  </file>
+  <file>
+    <filename>Utils.lua</filename>
+  </file>
+  <file>
+    <filename>main.lua</filename>
+  </file>
+</project>

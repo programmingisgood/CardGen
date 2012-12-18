@@ -35,4 +35,18 @@ Utils.SetColor = function(item, red, green, blue, alpha)
     
 end
 
+Utils.CreateCycleTextProvider = function(cycleItems)
+
+    local cycleNum = 1
+    return function()
+
+        if cycleNum > #cycleItems then cycleNum = 1 end
+        local retItem = tostring(cycleItems[cycleNum])
+        cycleNum = cycleNum + 1
+        return retItem
+        
+    end
+    
+end
+
 return Utils

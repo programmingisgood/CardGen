@@ -5,6 +5,8 @@ local TextBox = { }
 
 local kFonts = { default = { } }
 
+local kAlignToAlignMode = { min = "left", center = "center", max = "right" }
+
 local function DrawTextBox(textBox, xSize, ySize)
 
     local fontName = textBox.fontName or "default"
@@ -22,18 +24,24 @@ local function DrawTextBox(textBox, xSize, ySize)
     end
     love.graphics.setFont(useFont)
     
-    local textWidth = useFont:getWidth(textBox.text)
-    local textHeight = useFont:getHeight(textBox.text)
+    local useText = textBox.text
+    if type(useText) == "function" then
+        useText = useText()
+    end
     
-    local x, y, boxXSize, boxYSize = Utils.CalcTranslate(xSize, ySize, textWidth / xSize, textHeight / ySize,
-                                                         textBox.xAlign, textBox.yAlign,
-                                                         textBox.xAnchor, textBox.yAnchor)
-    love.graphics.translate(x, y)
+    --local textWidth = useFont:getWidth(useText)
+    --local textHeight = useFont:getHeight(useText)
+    
+    --local x, y, boxXSize, boxYSize = Utils.CalcTranslate(xSize, ySize, textWidth / xSize, textHeight / ySize,
+    --                                                     textBox.xAlign, textBox.yAlign,
+    --                                                     textBox.xAnchor, textBox.yAnchor)
+    
+    --love.graphics.translate(x, y)
     
     love.graphics.setColor(textBox.red or 0, textBox.green or 0, textBox.blue or 0, textBox.alpha or 255)
-    love.graphics.print(textBox.text, 0, 0)
+    love.graphics.printf(useText, 0, 0, xSize, kAlignToAlignMode[textBox.xAnchor])
     
-    --love.graphics.rectangle("line", 0, 0, boxXSize, boxYSize)
+    --love.graphics.rectangle("line", 0, 0, xSize, ySize)
     
 end
 

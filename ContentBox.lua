@@ -8,7 +8,9 @@ local function DrawContentBox(contentBox, xSize, ySize)
     local x, y, boxXSize, boxYSize = Utils.CalcTranslate(xSize, ySize, contentBox.xSize, contentBox.ySize,
                                                          contentBox.xAlign, contentBox.yAlign,
                                                          contentBox.xAnchor, contentBox.yAnchor)
-    love.graphics.translate(x, y)
+    local xOff = (contentBox.xOff or 0) * xSize
+    local yOff = (contentBox.yOff or 0) * ySize
+    love.graphics.translate(x + xOff, y + yOff)
     
     love.graphics.setColor(0, 0, 0, 255)
     
@@ -31,6 +33,13 @@ local function AddBox(contentBox, addBox)
     
 end
 
+local function SetOffset(contentBox, xOff, yOff)
+
+    contentBox.xOff = xOff
+    contentBox.yOff = yOff
+    
+end
+
 ContentBox.Create = function(xAnchor, yAnchor, xSize, ySize)
 
     local contentBox = { xAnchor = xAnchor, yAnchor = yAnchor, xSize = xSize, ySize = ySize }
@@ -38,6 +47,7 @@ ContentBox.Create = function(xAnchor, yAnchor, xSize, ySize)
     contentBox.Draw = DrawContentBox
     contentBox.SetAlignment = Utils.SetBoxAlignment
     contentBox.AddBox = AddBox
+    contentBox.SetOffset = SetOffset
     
     return contentBox
     
